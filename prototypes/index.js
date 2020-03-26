@@ -1,17 +1,51 @@
-const { kitties } = require('./datasets/kitties');
-const { clubs } = require('./datasets/clubs');
-const { mods } = require('./datasets/mods');
-const { cakes } = require('./datasets/cakes');
-const { classrooms } = require('./datasets/classrooms');
-const { breweries } = require('./datasets/breweries');
-const { nationalParks } = require('./datasets/nationalParks');
-const { books } = require('./datasets/books');
-const { weather } = require('./datasets/weather');
-const { instructors, cohorts } = require('./datasets/turing');
-const { bosses, sidekicks } = require('./datasets/bosses');
-const { constellations, stars } = require('./datasets/astronomy');
-const { weapons, characters } = require('./datasets/ultima');
-const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
+const {
+  kitties
+} = require('./datasets/kitties');
+const {
+  clubs
+} = require('./datasets/clubs');
+const {
+  mods
+} = require('./datasets/mods');
+const {
+  cakes
+} = require('./datasets/cakes');
+const {
+  classrooms
+} = require('./datasets/classrooms');
+const {
+  breweries
+} = require('./datasets/breweries');
+const {
+  nationalParks
+} = require('./datasets/nationalParks');
+const {
+  books
+} = require('./datasets/books');
+const {
+  weather
+} = require('./datasets/weather');
+const {
+  instructors,
+  cohorts
+} = require('./datasets/turing');
+const {
+  bosses,
+  sidekicks
+} = require('./datasets/bosses');
+const {
+  constellations,
+  stars
+} = require('./datasets/astronomy');
+const {
+  weapons,
+  characters
+} = require('./datasets/ultima');
+const {
+  dinosaurs,
+  humans,
+  movies
+} = require('./datasets/dinosaurs');
 
 
 
@@ -26,22 +60,20 @@ const kittyPrompts = {
   orangeKittyNames() {
 
     // Return an array of just the names of kitties who are orange e.g.
+    const orangeKitties = kitties.filter(kitty => kitty.color === 'orange')
+      .map(kitty => kitty.name);
     // ['Tiger', 'Snickers']
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = orangeKitties;
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   sortByAge() {
     // Sort the kitties by their age
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const sortedByAge = kitties.sort((kitty1, kitty2) => {
+      return kitty2.age - kitty1.age;
+    });
+    const result = sortedByAge;
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   growUp() {
@@ -58,7 +90,14 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const kittyArray = this.sortByAge();
+    const grownBy2 = kittyArray.map(kitty => {
+      kitty.age += 2;
+      console.log(kitty);
+      return kitty;
+    })
+
+    const result = grownBy2;
     return result;
   }
 };
@@ -83,23 +122,34 @@ const kittyPrompts = {
 const clubPrompts = {
   membersBelongingToClubs() {
     // Create an object whose keys are the names of people, and whose values are
+
     // arrays that include the names of the clubs that person is a part of. e.g.
     // {
     //   Louisa: ['Drama', 'Art'],
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const people = Object.entries(clubs);
+    console.log(people);
+    // loop through each club
+    const result = clubs.reduce((finalObj, x) => {
+      // loop through each member
+      x.members.forEach(member => {
+        // if member name is not a key yet- set it as a key
+        if (!finalObj[member]) {
+          finalObj[member] = [];
+        }
+        finalObj[member].push(x.club);
+        // push the clubs name into that member array
+      })
+      return finalObj
+    }, {});
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
   }
 };
-
-
-
 
 
 
@@ -118,6 +168,7 @@ const clubPrompts = {
 const modPrompts = {
   studentsPerMod() {
     // Return an array of objects where the keys are mod (the number of the module)
+
     // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
     // [
     //   { mod: 1, studentsPerInstructor: 9 },
@@ -479,7 +530,7 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'REPLACE  WITH YOUR RESULT HERE';
     return result;
 
     // Annotation:
