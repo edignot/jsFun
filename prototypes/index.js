@@ -47,19 +47,12 @@ const {
   movies
 } = require('./datasets/dinosaurs');
 
-
-
-
-
-
 // SINGLE DATASETS
 // =================================================================
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
-
-    // Return an array of just the names of kitties who are orange e.g.
     const orangeKitties = kitties.filter(kitty => kitty.color === 'orange')
       .map(kitty => kitty.name);
     // ['Tiger', 'Snickers']
@@ -68,7 +61,6 @@ const kittyPrompts = {
   },
 
   sortByAge() {
-    // Sort the kitties by their age
     const sortedByAge = kitties.sort((kitty1, kitty2) => {
       return kitty2.age - kitty1.age;
     });
@@ -77,174 +69,72 @@ const kittyPrompts = {
   },
 
   growUp() {
-    // Return an array of kitties who have all grown up by 2 years e.g.
-    // [{
-    //   name: 'Felicia',
-    //   age: 4,
-    //   color: 'grey'
-    // },
-    // {
-    //   name: 'Tiger',
-    //   age: 7,
-    //   color: 'orange'
-    // },
-    // ...etc]
-
     const kittyArray = this.sortByAge();
     const grownBy2 = kittyArray.map(kitty => {
       kitty.age += 2;
       console.log(kitty);
       return kitty;
-    })
+    });
 
     const result = grownBy2;
     return result;
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   membersBelongingToClubs() {
-    // Create an object whose keys are the names of people, and whose values are
-
-    // arrays that include the names of the clubs that person is a part of. e.g.
-    // {
-    //   Louisa: ['Drama', 'Art'],
-    //   Pam: ['Drama', 'Art', 'Chess'],
-    //   ...etc
-    // }
-    const people = Object.entries(clubs);
-    console.log(people);
-    // loop through each club
-    const result = clubs.reduce((finalObj, x) => {
+    const result = clubs.reduce((finalObj, club) => {
       // loop through each member
-      x.members.forEach(member => {
+      club.members.forEach(member => {
         // if member name is not a key yet- set it as a key
         if (!finalObj[member]) {
           finalObj[member] = [];
         }
-        finalObj[member].push(x.club);
+        finalObj[member].push(club.club);
         // push the clubs name into that member array
       })
       return finalObj
     }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
   studentsPerMod() {
-    // Return an array of objects where the keys are mod (the number of the module)
 
-    // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
-    // [
-    //   { mod: 1, studentsPerInstructor: 9 },
-    //   { mod: 2, studentsPerInstructor: 11 },
-    //   { mod: 3, studentsPerInstructor: 10 },
-    //   { mod: 4, studentsPerInstructor: 8 }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.reduce((finalArray, thisMod) => {
+      let modObj = {
+        mod: thisMod.mod,
+        studentsPerInstructor: (thisMod.students / thisMod.instructors)
+      };
+      finalArray.push(modObj);
+      return finalArray
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
   stockPerCake() {
-    // Return an array of objects that include just the flavor of the cake and how
-    // much of that cake is in stock e.g.
-    // [
-    //    { flavor: 'dark chocolate', inStock: 15 },
-    //    { flavor: 'yellow', inStock: 14 },
-    //    ..etc
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((finalArr, cake) => {
+      let newCake = {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      };
+      finalArr.push(newCake);
+      return finalArr;
+    }, [])
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   onlyInStock() {
-    // Return an array of only the cakes that are in stock
-    // e.g.
-    // [
-    //   {
-    //   cakeFlavor: 'dark chocolate',
-    //   filling: null,
-    //   frosting: 'dark chocolate ganache',
-    //   toppings: ['dutch process cocoa', 'toasted sugar', 'smoked sea salt'],
-    //   inStock: 15
-    // },
-    // {
-    //   cakeFlavor: 'yellow',
-    //   filling: 'citrus glaze',
-    //   frosting: 'chantilly cream',
-    //   toppings: ['berries', 'edible flowers'],
-    //   inStock: 14
-    // },
-    // ..etc
-    // ]
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
 
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   totalInventory() {
