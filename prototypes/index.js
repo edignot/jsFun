@@ -53,7 +53,8 @@ const {
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
-    const orangeKitties = kitties.filter(kitty => kitty.color === 'orange')
+    const orangeKitties = kitties
+      .filter(kitty => kitty.color === 'orange')
       .map(kitty => kitty.name);
     // ['Tiger', 'Snickers']
     const result = orangeKitties;
@@ -93,8 +94,8 @@ const clubPrompts = {
         }
         finalObj[member].push(club.club);
         // push the clubs name into that member array
-      })
-      return finalObj
+      });
+      return finalObj;
     }, {});
     return result;
   }
@@ -103,14 +104,13 @@ const clubPrompts = {
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
   studentsPerMod() {
-
     const result = mods.reduce((finalArray, thisMod) => {
       let modObj = {
         mod: thisMod.mod,
-        studentsPerInstructor: (thisMod.students / thisMod.instructors)
+        studentsPerInstructor: thisMod.students / thisMod.instructors
       };
       finalArray.push(modObj);
-      return finalArray
+      return finalArray;
     }, []);
     return result;
   }
@@ -126,106 +126,70 @@ const cakePrompts = {
       };
       finalArr.push(newCake);
       return finalArr;
-    }, [])
+    }, []);
     return result;
   },
 
   onlyInStock() {
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
-
   },
 
   totalInventory() {
-    // Return the total amount of cakes in stock e.g.
-    // 59
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((totalCakes, cake) => {
+      return totalCakes += cake.inStock;
+    }, 0);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   allToppings() {
-    // Return an array of all unique toppings (no duplicates) needed to bake
-    // every cake in the dataset e.g.
-    // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((allToppings, cake) => {
+      cake.toppings.forEach(topping => {
+        if (!allToppings.includes(topping)) {
+          allToppings.push(topping)
+        }
+      })
+      return allToppings;
+    }, [])
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
+  // FINISH
   groceryList() {
-    // I need to make a grocery list. Please give me an object where the keys are
-    // each topping, and the values are the amount of that topping I need to buy e.g.
-    // {
-    //    'dutch process cocoa': 1,
-    //    'toasted sugar': 3,
-    //    'smoked sea salt': 3,
-    //    'berries': 2,
-    //    ...etc
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((groceryObj, cake) => {
+      cake.toppings.forEach(topping => {
+        (!groceryObj.topping) && (groceryObj.topping = 0);
+        groceryObj.topping += 1;
+      })
+      return groceryObj;
+    }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
   feClassrooms() {
-    // Create an array of just the front-end classrooms. e.g.
-    // [
-    //   { roomLetter: 'A', program: 'FE', capacity: 32 },
-    //   { roomLetter: 'C', program: 'FE', capacity: 27 },
-    //   { roomLetter: 'E', program: 'FE', capacity: 22 },
-    //   { roomLetter: 'G', program: 'FE', capacity: 29 }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => classroom.program === 'FE');
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   totalCapacities() {
-    // Create an object where the keys are 'feCapacity' and 'beCapacity',
-    // and the values are the total capacity for all classrooms in each program e.g.
-    // {
-    //   feCapacity: 110,
-    //   beCapacity: 96
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let feNumber = 0;
+    let beNumber = 0;
+    classrooms.forEach(classroom => {
+      if (classroom.program === 'FE') {
+        feNumber += classroom.capacity;
+      } else if (classroom.program === 'BE') {
+        beNumber += classroom.capacity;
+      }
+    });
+    const result = classrooms.reduce((capacityObj, classroom) => {
+      capacityObj.feCapacity = feNumber;
+      capacityObj.beCapacity = beNumber;
+      return capacityObj;
+    }, {})
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   sortByCapacity() {
@@ -239,12 +203,6 @@ const classPrompts = {
   }
 };
 
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
 // DATASET: books from './datasets/books
 
 const bookPrompts = {
@@ -257,13 +215,11 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
-
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
-
   },
   getNewBooks() {
     // return an array of objects containing all books that were
@@ -279,15 +235,7 @@ const bookPrompts = {
     // Annotation:
     // Write your annotation here as a comment
   }
-
 };
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 
 // DATASET: weather from './datasets/weather
 
@@ -331,16 +279,8 @@ const weatherPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-
   }
 };
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
 
 // DATASET: nationalParks from ./datasets/nationalParks
 
@@ -368,7 +308,6 @@ const nationalParksPrompts = {
     // { Maine: 'Acadia' },
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
-
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
@@ -400,19 +339,6 @@ const nationalParksPrompts = {
     // Write your annotation here as a comment
   }
 };
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
@@ -455,33 +381,6 @@ const breweryPrompts = {
     // Write your annotation here as a comment
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DOUBLE DATASETS
 // =================================================================
@@ -557,22 +456,6 @@ const turingPrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
   bossLoyalty() {
@@ -591,22 +474,6 @@ const bossPrompts = {
     // Write your annotation here as a comment
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
@@ -665,7 +532,6 @@ const astronomyPrompts = {
     //    "Orion",
     //    "The Little Dipper" ]
 
-
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
 
@@ -674,26 +540,9 @@ const astronomyPrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
 // DATASET: charaters, weapons from ./datasets/ultima
 const ultimaPrompts = {
   totalDamage() {
-
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
@@ -705,7 +554,6 @@ const ultimaPrompts = {
   },
 
   charactersByTotal() {
-
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
@@ -714,24 +562,8 @@ const ultimaPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  },
+  }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
