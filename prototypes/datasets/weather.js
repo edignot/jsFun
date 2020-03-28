@@ -1,5 +1,5 @@
-const weather = [
-    {
+/* eslint-disable indent */
+const weather = [{
         location: 'Denver, Colorado',
         type: 'clear',
         humidity: 59,

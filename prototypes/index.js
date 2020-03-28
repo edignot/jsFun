@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const {
   kitties
 } = require('./datasets/kitties');
@@ -193,227 +194,161 @@ const classPrompts = {
   },
 
   sortByCapacity() {
-    // Return the array of classrooms sorted by their capacity (least capacity to greatest)
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: books from './datasets/books
-
 const bookPrompts = {
   removeViolence() {
-    // return an array of all book titles that are not horror or true crime. Eg:
-
-    //  ['1984', 'The Great Gatsby', 'Lord of the Flies', 'Harry Potter and the Sorcerer\'s Stone',
-    //   'The Hitchhiker\'s Guide to the Galaxy', 'Flowers for Algernon', 'Slaughterhouse-Five',
-    //   'The Handmaid\'s Tale', 'The Metamorphosis', 'Brave New World', 'Life of Pi',
-    //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
-    //   'Catch-22', 'Treasure Island']
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((titleArr, book) => {
+      book.genre !== 'Horror' && book.genre !== 'True Crime' && titleArr.push(book.title);
+      return titleArr;
+    }, [])
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
+
   getNewBooks() {
-    // return an array of objects containing all books that were
-    // published in the 90's and 00's. Inlucde the title and the year Eg:
 
-    // [{ title: 'Harry Potter and the Sorcerer\'s Stone', year: 1997 },
-    //  { title: 'Life of Pi', year: 2001 },
-    //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((newBookArr, book) => {
+      if (book.published >= 1990) {
+        let newBook = {
+          title: book.title,
+          year: book.published
+        };
+        newBookArr.push(newBook);
+      }
+      return newBookArr;
+    }, [])
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: weather from './datasets/weather
-
 const weatherPrompts = {
   getAverageTemps() {
-    // return an array of all the average temperatures. Eg:
-    // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.reduce((avgTempArr, location) => {
+      let avgTemp = (location.temperature.high + location.temperature.low) / 2;
+      avgTempArr.push(avgTemp);
+      return avgTempArr;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   findSunnySpots() {
-    // Return an array of sentences of the locations that are sunny
-    // and mostly sunny. Include the location and weather type. Eg:
-    // [ 'Atlanta, Georgia is sunny.',
-    // 'New Orleans, Louisiana is sunny.',
-    // 'Raleigh, North Carolina is mostly sunny.' ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.reduce((sunnyArr, place) => {
+        (place.type === 'sunny' || place.type === 'mostly sunny') &&
+        sunnyArr.push(`${place.location} is ${place.type}.`);
+        return sunnyArr;
+      },
+      []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   findHighestHumidity() {
-    // Return the location with the highest humidity. Eg:
-    // {
-    //   location: 'Portland, Oregon',
-    //   type: 'cloudy',
-    //   humidity: 84,
-    //   temperature: { high: 49, low: 38 }
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((a, b) => b.humidity - a.humidity)[0];
+    console.log(result);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: nationalParks from ./datasets/nationalParks
-
 const nationalParksPrompts = {
   getParkVisitList() {
-    /// Return an object containing the names of which parks I need to visit
-    // and the ones I have already visited eg:
-    // {
-    //   parksToVisit: ["Yellowstone", "Glacier", "Everglades"],
-    //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
-    //}
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((statusObj, park) => {
+      park.visited && statusObj.parksVisited.push(park.name);
+      !park.visited && statusObj.parksToVisit.push(park.name);
+      return statusObj;
+    }, {
+      parksToVisit: [],
+      parksVisited: []
+    });
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   getParkInEachState() {
-    // Return an array of objects where the key is the state and the value is its National Park
-    // eg: [ { Colorado: 'Rocky Mountain' },
-    // { Wyoming: 'Yellowstone' },
-    // { Montana: 'Glacier' },
-    // { Maine: 'Acadia' },
-    // { Utah: 'Zion' },
-    // { Florida: 'Everglades' } ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((parksArr, park) => {
+      let newPark = {
+        [park.location]: park.name
+      };
+      parksArr.push(newPark);
+      return parksArr;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   getParkActivities() {
-    // Return an array of all the activities I can do
-    // in a National Park. Make sure to exclude duplicates. eg:
-    // [ 'hiking',
-    //   'shoeshoing',
-    //   'camping',
-    //   'fishing',
-    //   'boating',
-    //   'watching wildlife',
-    //   'cross-country skiing',
-    //   'swimming',
-    //   'bird watching',
-    //   'canyoneering',
-    //   'backpacking',
-    //   'rock climbing' ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((activityArr, park) => {
+      park.activities.filter(activity => !activityArr.includes(activity) && activityArr.push(activity));
+      return activityArr;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
   getBeerCount() {
-    // Return the total beer count of all beers for every brewery e.g.
-    // 40
-
-    const result = 'REPLACE  WITH YOUR RESULT HERE';
+    const result = breweries.reduce((count, brewery) => {
+      count += brewery.beers.length;
+      return count;
+    }, 0);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   getBreweryBeerCount() {
-    // Return an array of objects where each object has the name of a brewery
-    // and the count of the beers that brewery has e.g.
-    // [
-    //  { name: 'Little Machine Brew', beerCount: 12 },
-    //  { name: 'Ratio Beerworks', beerCount: 5},
-    // ...etc.
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((brewArr, brewery) => {
+      let brewInfo = {
+        name: brewery.name,
+        beerCount: brewery.beers.length
+      };
+      console.log(brewery);
+      brewArr.push(brewInfo);
+      return brewArr;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   findHighestAbvBeer() {
-    // Return the beer which has the highest ABV of all beers
-    // e.g.
-    // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let beers = [];
+    breweries.forEach(brewery => {
+      return brewery.beers.forEach(beer => {
+        beers.push(beer);
+      });
+    });
+    const result = beers.sort((a, b) => {
+      return b.abv - a.abv;
+    })[0];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
-
 // DOUBLE DATASETS
 // =================================================================
 
 // DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
   studentsForEachInstructor() {
-    // Return an array of instructors where each instructor is an object
-    // with a name and the count of students in their module. e.g.
-    // [
-    //  { name: 'Pam', studentCount: 21 },
-    //  { name: 'Robbie', studentCount: 18 }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((instructorInfo, instructor) => {
+      let cohort = cohorts.find(cohort => instructor.module === cohort.module);
+      let newInstructor = {
+        name: instructor.name,
+        studentCount: cohort.studentCount
+      };
+      instructorInfo.push(newInstructor);
+      return instructorInfo;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   studentsPerInstructor() {
-    // Return an object of how many students per teacher there are in each cohort e.g.
-    // {
-    // cohort1806: 9,
-    // cohort1804: 10.5
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((data, cohort) => {
+      let instrucructorNum = instructors.filter(instructor => instructor.module === cohort.module).length;
+      data[`cohort${cohort.cohort}`] = cohort.studentCount / instrucructorNum;
+      console.log(data);
+      return data;
+    }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   modulesPerTeacher() {
