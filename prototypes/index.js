@@ -236,6 +236,16 @@ const weatherPrompts = {
     return result;
   },
 
+  // findSunnySpots() {
+  //   const result = weather.reduce((sunnyArr, place) => {
+  //       (place.type === 'sunny' || place.type === 'mostly sunny') &&
+  //       sunnyArr.push(`${place.location} is ${place.type}.`);
+  //       return sunnyArr;
+  //     },
+  //     []);
+  //   return result;
+  // },
+
   findSunnySpots() {
     const result = weather.reduce((sunnyArr, place) => {
         (place.type === 'sunny' || place.type === 'mostly sunny') &&
@@ -246,9 +256,10 @@ const weatherPrompts = {
     return result;
   },
 
+
+
   findHighestHumidity() {
     const result = weather.sort((a, b) => b.humidity - a.humidity)[0];
-    console.log(result);
     return result;
   }
 };
@@ -352,26 +363,31 @@ const turingPrompts = {
   },
 
   modulesPerTeacher() {
-    // Return an object where each key is an instructor name and each value is
-    // an array of the modules they can teach based on their skills. e.g.:
-    // {
-    //     Pam: [2, 4],
-    //     Brittany: [2, 4],
-    //     Nathaniel: [2, 4],
-    //     Robbie: [4],
-    //     Leta: [2, 4],
-    //     Travis: [1, 2, 3, 4],
-    //     Louisa: [1, 2, 3, 4],
-    //     Christie: [1, 2, 3, 4],
-    //     Will: [1, 2, 3, 4]
-    //   }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((obj, instructor) => {
+      obj[instructor.name] = [];
+      cohorts.forEach(cohort => {
+        cohort.curriculum.forEach(curr => {
+          if (instructor.teaches.includes(curr)) {
+            if (!obj[instructor.name].includes(cohort.module)) {
+              obj[instructor.name].push(cohort.module);
+            }
+          }
+        });
+      });
+      return obj;
+    }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
+
+  //   const result = instructors.reduce((obj, instructor) => {
+  //     obj[instructor.name] = [];
+  //     cohorts.forEach(cohort => {
+  //       cohort.curriculum.forEach(curr => (instructor.teaches.includes(curr) && (!obj[instructor.name].includes(cohort.module) && obj[instructor.name].push(cohort.module))));
+  //     });
+  //     return obj;
+  //   }, {});
+  //   return result;
+  // },
 
   curriculumPerTeacher() {
     // Return an object where each key is a curriculum topic and each value is

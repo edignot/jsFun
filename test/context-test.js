@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const chai = require("chai")
 const expect = chai.expect;
 const context = require("../context/index");
@@ -12,8 +13,8 @@ global.$ = (() => ({
   on: () => {}
 }));
 
-chai.use(function(e, t) {
-  e.Assertion.addMethod("withMessage", function(e) {
+chai.use(function (e, t) {
+  e.Assertion.addMethod("withMessage", function (e) {
     t.flag(this, "message", e)
   })
 });

@@ -16,12 +16,29 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'Global Window Object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   exerciseB() {
     function fn() {
@@ -40,7 +57,7 @@ const context = {
   exerciseC() {
     const car = {
       make: 'Tesla',
-      getInfo: function(){
+      getInfo: function () {
         console.log(this);
       }
     };
@@ -59,9 +76,9 @@ const context = {
   exerciseD() {
     const dog = {
       breed: 'Chihuahua',
-      getBreed: function(){
+      getBreed: function () {
 
-        const innerFunction = function() {
+        const innerFunction = function () {
           console.log(this.breed);
         };
 
@@ -129,7 +146,7 @@ const context = {
       }
 
       restart() {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(`Restarting ${this.title}...`);
         }, 1000);
       }
@@ -149,7 +166,7 @@ const context = {
   exerciseH() {
     const obj = {
       arrowFunction: null,
-      method: function() {
+      method: function () {
         this.arrowFunction = () => {
           return this;
         };
@@ -177,66 +194,49 @@ const context = {
       name: 'Audre'
     }];
 
-    poets.map(function(poet) {
+    poets.map(function (poet) {
       return this;
     }, poets);
 
-    // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'poets';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
   },
 
   exerciseJ() {
     const el = $('#btn');
-    el.on('click', function() {
+    el.on('click', function () {
       console.log($(this));
     });
-
-    // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment.
   },
 
   exerciseK() {
     var store = {
       fruit: 'grapes',
-      sellMe: function() {
+      sellMe: function () {
         return this.fruit;
       }
     };
-
     // What is the value of `this` when we call store.sellMe()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'store';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment.
   },
 
   exerciseL() {
     const dog = {
       breed: 'Chihuahua',
-      getBreed: function(){
+      getBreed: function () {
         var _this = this;
 
-        setTimeout(function() {
+        setTimeout(function () {
           console.log('Your dog is a ' + _this.breed);
         });
       }
     };
-
     // What is the value of `this` when we call dog.getBreed()?
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseM() {
@@ -255,11 +255,8 @@ const context = {
     }
 
     // What is the value of `this` when we call makeBirdNoise.call(robert);
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'robert';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseN() {
@@ -281,11 +278,8 @@ const context = {
     var firstBird = new Bird('Calvin', 'budgie');
 
     // What is the value of `this` when we call firstBird.delayNoise();
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'Instance of bird';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseO() {
@@ -306,18 +300,15 @@ const context = {
 
   exerciseP() {
     const child = {
-      totalScreams : 4,
+      totalScreams: 4,
       scream: () => {
         this.totalScreams++;
       }
     };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
-
     // What is the value of `this` when we call child.scream();
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 

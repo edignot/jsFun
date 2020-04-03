@@ -11,12 +11,13 @@ const scope = {
       }
 
       function beautifyPerson() {
-        // Log A: personB
-        
+
+        console.log('personB', personB);
+
         if (personB.includes('B')) {
           personB = person;
           personC = personB;
-          // Log B: personC
+          // Log B: person C 
         }
       }
 
@@ -29,7 +30,15 @@ const scope = {
 
     // Log D: personC
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 'Ben'
+    }, {
+      B: 'CardiB'
+    }, {
+      C: 'CardiB'
+    }, {
+      D: 'Paul'
+    }];
     return result;
 
     // Annotation:
@@ -37,33 +46,33 @@ const scope = {
   },
 
   exerciseB() {
-    let number = 30;
+    let number = 75;
 
     function numberFunction() {
-      let number = 75;
+      number = 75; //75 //64
 
       if (number === 75) {
-        let number = 28;
+        let number = 28; //28
       }
 
-      // Log A: number
+      // Log A: number 75
 
       function newNumber() {
         number = 64;
 
-        // Log B: number
+        // Log B: number 64
       }
 
       newNumber();
 
-      // Log C: number
+      // Log C: number 64
     }
 
     numberFunction();
 
-    // Log D: number
+    // Log D: number 30
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = '';
     return result;
 
     // Annotation:
@@ -116,7 +125,7 @@ const scope = {
 
       // Log A: greeting
 
-      const newGreeting = ()  => {
+      const newGreeting = () => {
         greeting = 'welcome';
 
         // Log B: greeting
@@ -174,7 +183,7 @@ const scope = {
     var dog = 'Spot';
 
     function petDog() {
-      // Log A: dog
+      // Log A: dog 'Spot'
 
       if (dog === 'Spot') {
         let dog = 'Fluffy';
@@ -198,7 +207,17 @@ const scope = {
 
     // Log E: dog
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 'Spot'
+    }, {
+      B: 'Spot'
+    }, {
+      C: 'Biscuit'
+    }, {
+      D: 'Biscuit'
+    }, {
+      E: 'Biscuit'
+    }];
     return result;
 
     // Annotation:
@@ -238,7 +257,7 @@ const scope = {
   exerciseH() {
     let num = 6;
 
-    const fn1 = function() {
+    const fn1 = function () {
       let num = 4;
 
       // Log A: num
@@ -258,7 +277,7 @@ const scope = {
       // Log C: newNum
     };
 
-    const fn2 = function(num){
+    const fn2 = function (num) {
       // Log D: num
 
       num = num + 1;
@@ -315,7 +334,7 @@ const scope = {
       // Log B: toppings
       var toppings = 'chipotle sauce';
 
-      if (toppings === 'chipotle sauce') { 
+      if (toppings === 'chipotle sauce') {
         sandwich = 'not a mediocre sandwich';
       }
 
@@ -486,6 +505,7 @@ const scope = {
 
   exerciseP() {
     let lunch;
+
     function orderLunch() {
       if (lunch) {
         // Log A: lunch
@@ -503,14 +523,18 @@ const scope = {
 
     // Log C: lunch
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      B: 'soup'
+    }, {
+      C: 'soup'
+    }];
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
   },
 
-  exerciseQ(){
+  exerciseQ() {
     let myKid = 'Pandora';
     let wildKids = ['Antigone'];
 
@@ -518,7 +542,7 @@ const scope = {
       // Log A: kid
       wildKids.push(kid);
       // Log B: wildKids
-  
+
       let drawOnTheWall = () => {
         let myKid = 'Mandy';
         // Log C: myKid
@@ -556,7 +580,7 @@ const scope = {
       // Log B: myName
 
       let innerFunc = () => {
-        let myName = 'Tesla'; 
+        let myName = 'Tesla';
         // Log C: myName
       };
 
@@ -567,7 +591,15 @@ const scope = {
     parentFunc();
     // Log D: myName
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 'Rody'
+    }, {
+      B: 'RodyToy'
+    }, {
+      C: 'Tesla'
+    }, {
+      D: 'RodyToyDaniel'
+    }];
     return result;
 
     // Annotation:
