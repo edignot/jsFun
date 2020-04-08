@@ -11,13 +11,12 @@ const scope = {
       }
 
       function beautifyPerson() {
-
         console.log('personB', personB);
 
         if (personB.includes('B')) {
           personB = person;
           personC = personB;
-          // Log B: person C 
+          // Log B: person C
         }
       }
 
@@ -31,28 +30,29 @@ const scope = {
     // Log D: personC
 
     const result = [{
-      A: 'Ben'
-    }, {
-      B: 'CardiB'
-    }, {
-      C: 'CardiB'
-    }, {
-      D: 'Paul'
-    }];
+        A: 'Ben',
+      },
+      {
+        B: 'CardiB',
+      },
+      {
+        C: 'CardiB',
+      },
+      {
+        D: 'Paul',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseB() {
     let number = 75;
 
     function numberFunction() {
-      number = 75; //75 //64
+      number = 75;
 
       if (number === 75) {
-        let number = 28; //28
+        let number = 28;
       }
 
       // Log A: number 75
@@ -72,11 +72,20 @@ const scope = {
 
     // Log D: number 30
 
-    const result = '';
+    const result = [{
+        A: 75,
+      },
+      {
+        B: 64,
+      },
+      {
+        C: 64,
+      },
+      {
+        D: 30,
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseC() {
@@ -106,11 +115,20 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        A: 'Yo',
+      },
+      {
+        B: 'Hey',
+      },
+      {
+        C: 'Hey',
+      },
+      {
+        D: 'Hello',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseD() {
@@ -140,7 +158,19 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        A: 'hi',
+      },
+      {
+        B: 'welcome',
+      },
+      {
+        C: 'welcome',
+      },
+      {
+        D: 'howdy',
+      },
+    ];
     return result;
 
     // Annotation:
@@ -172,11 +202,20 @@ const scope = {
 
     // Log D: name
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        C: 'Brittany',
+      },
+      {
+        A: 'Nathaniel',
+      },
+      {
+        B: 'Nathaniel',
+      },
+      {
+        D: 'Brittany',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseF() {
@@ -195,7 +234,6 @@ const scope = {
         dog = 'Biscuit';
 
         // Log C: dog
-
       }
 
       rollOver();
@@ -208,27 +246,28 @@ const scope = {
     // Log E: dog
 
     const result = [{
-      A: 'Spot'
-    }, {
-      B: 'Spot'
-    }, {
-      C: 'Biscuit'
-    }, {
-      D: 'Biscuit'
-    }, {
-      E: 'Biscuit'
-    }];
+        A: 'Spot',
+      },
+      {
+        B: 'Spot',
+      },
+      {
+        C: 'Biscuit',
+      },
+      {
+        D: 'Biscuit',
+      },
+      {
+        E: 'Biscuit',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseG() {
     var fruit = 'apple';
 
     function eatFruit() {
-
       if (fruit !== 'kiwi') {
         var fruit = 'mango';
 
@@ -247,7 +286,16 @@ const scope = {
 
     // Log D: fruit
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        A: 'mango',
+      },
+      {
+        B: 'mango',
+      },
+      {
+        C: 'apple',
+      },
+    ];
     return result;
 
     // Annotation:
@@ -287,7 +335,22 @@ const scope = {
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        A: 'Spot',
+      },
+      {
+        B: 'Spot',
+      },
+      {
+        C: 'Biscuit',
+      },
+      {
+        D: 'Biscuit',
+      },
+      {
+        E: 'Biscuit',
+      },
+    ];
     return result;
 
     // Annotation:
@@ -318,11 +381,32 @@ const scope = {
     eatSnack();
     // Log E: hunger
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+        A: 75,
+      },
+      {
+        B: 0,
+      },
+      {
+        C: 75,
+      },
+      {
+        D: 80,
+      },
+      {
+        A: 55,
+      },
+      {
+        B: 0,
+      },
+      {
+        C: 55,
+      },
+      {
+        C: 55,
+      }
+    ]
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseJ() {
@@ -359,7 +443,19 @@ const scope = {
     // Log E: sandwich
     // Log F: amandaBynes
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 'ketchup sandwich'
+    }, {
+      D: 'gouda'
+    }, {
+      B: undefined
+    }, {
+      C: 'not a mediocre sandwich'
+    }, {
+      E: 'not a mediocre sandwich'
+    }, {
+      F: 'National Treasure'
+    }]
     return result;
 
     // Annotation:
@@ -380,11 +476,12 @@ const scope = {
 
     // Log B: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 7
+    }, {
+      B: 7
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseL() {
@@ -412,11 +509,14 @@ const scope = {
 
     // Log C: grade
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 95
+    }, {
+      B: 90
+    }, {
+      C: 90
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseM() {
@@ -438,18 +538,22 @@ const scope = {
 
     // Log D: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 5
+    }, {
+      B: 6
+    }, {
+      C: 'reference error'
+    }, {
+      D: 6
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseN() {
     var instructor = 'Pam';
 
     function changeInstructor() {
-
       // Log A: instructor
 
       if (instructor === 'Brittany') {
@@ -468,7 +572,6 @@ const scope = {
       rename();
 
       // Log D: instructor
-
     }
 
     // Log E: instructor
@@ -477,11 +580,20 @@ const scope = {
 
     // Log F: instructor
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      E: 'Pam'
+    }, {
+      A: 'Pam'
+    }, {
+      B: 'Pam'
+    }, {
+      C: 'Louisa'
+    }, {
+      D: 'Louisa'
+    }, {
+      F: 'Louisa'
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseO() {
@@ -496,11 +608,14 @@ const scope = {
     putOnShoe();
     // Log C: shoe
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      B: 'flipflop'
+    }, {
+      A: undefined
+    }, {
+      C: 'flipflop'
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseP() {
@@ -524,21 +639,20 @@ const scope = {
     // Log C: lunch
 
     const result = [{
-      B: 'soup'
-    }, {
-      C: 'soup'
-    }];
+        B: 'soup',
+      },
+      {
+        C: 'soup',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseQ() {
     let myKid = 'Pandora';
     let wildKids = ['Antigone'];
 
-    let myCrazyKidAntics = kid => {
+    let myCrazyKidAntics = (kid) => {
       // Log A: kid
       wildKids.push(kid);
       // Log B: wildKids
@@ -564,11 +678,18 @@ const scope = {
 
     myCrazyKidAntics(myKid);
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{
+      A: 'Pandora'
+    }, {
+      B: ['Antigone', 'Pandora']
+    }, {
+      C: 'Mandy'
+    }, {
+      D: 'Antigone'
+    }, {
+      E: 'Pandora'
+    }];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   exerciseR() {
@@ -592,19 +713,20 @@ const scope = {
     // Log D: myName
 
     const result = [{
-      A: 'Rody'
-    }, {
-      B: 'RodyToy'
-    }, {
-      C: 'Tesla'
-    }, {
-      D: 'RodyToyDaniel'
-    }];
+        A: 'Rody',
+      },
+      {
+        B: 'RodyToy',
+      },
+      {
+        C: 'Tesla',
+      },
+      {
+        D: 'RodyToyDaniel',
+      },
+    ];
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
-  }
+  },
 };
 
 module.exports = scope;

@@ -74,7 +74,6 @@ const kittyPrompts = {
     const kittyArray = this.sortByAge();
     const grownBy2 = kittyArray.map(kitty => {
       kitty.age += 2;
-      console.log(kitty);
       return kitty;
     });
 
@@ -314,7 +313,6 @@ const breweryPrompts = {
         name: brewery.name,
         beerCount: brewery.beers.length
       };
-      console.log(brewery);
       brewArr.push(brewInfo);
       return brewArr;
     }, []);
@@ -356,7 +354,6 @@ const turingPrompts = {
     const result = cohorts.reduce((data, cohort) => {
       let instrucructorNum = instructors.filter(instructor => instructor.module === cohort.module).length;
       data[`cohort${cohort.cohort}`] = cohort.studentCount / instrucructorNum;
-      console.log(data);
       return data;
     }, {});
     return result;
@@ -390,150 +387,121 @@ const turingPrompts = {
   // },
 
   curriculumPerTeacher() {
-    // Return an object where each key is a curriculum topic and each value is
-    // an array of instructors who teach that topic e.g.:
-    // {
-    //   html: [ 'Travis', 'Louisa' ],
-    //   css: [ 'Travis', 'Louisa' ],
-    //   javascript: [ 'Travis', 'Louisa', 'Christie', 'Will' ],
-    //   recursion: [ 'Pam', 'Leta' ]
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((obj, instructor) => {
+      instructor.teaches.forEach(skill => {
+        !obj[skill] && (obj[skill] = []);
+        (obj[skill] && !obj[skill].includes(instructor.name)) && obj[skill].push(instructor.name);
+      });
+      return obj;
+    }, {})
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
   bossLoyalty() {
-    // Create an array of objects that each have the name of the boss and the sum
-    // loyalty of all their sidekicks. e.g.:
-    // [
-    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
-    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
-    //   { bossName: 'Scar', sidekickLoyalty: 16 }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const bossArr = Object.values(bosses);
+    const result = bossArr.reduce((acc, boss) => {
+      let obj = {};
+      obj.bossName = boss.name,
+        obj.sidekickLoyalty = 0;
+      sidekicks.forEach(sidekick => {
+        (sidekick.boss === boss.name) && (obj.sidekickLoyalty += sidekick.loyaltyToBoss)
+      });
+      acc.push(obj);
+      return acc;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
+// getting error
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
   starsInConstellations() {
-    // Return an array of all the stars that appear in any of the constellations
-    // listed in the constellations object e.g.
-    // [
-    //   { name: 'Rigel',
-    //     visualMagnitude: 0.13,
-    //     constellation: 'Orion',
-    //     lightYearsFromEarth: 860,
-    //     color: 'blue' },
-    //   { name: 'Betelgeuse',
-    //     visualMagnitude: 0.5,
-    //     constellation: 'Orion',
-    //     lightYearsFromEarth: 640,
-    //     color: 'red' }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const data = Object.values(constellations);
+    const result = data.reduce((arr, constellation) => {
+      constellation.stars.forEach(constar => {
+        stars.forEach(star => {
+          (star.name === constar) && arr.push(star);
+        })
+      })
+      return arr;
+    }, []);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   starsByColor() {
-    // Return an object with keys of the different colors of the stars,
-    // whose values are arrays containing the star objects that match e.g.
-    // {
-    //   blue: [{obj}, {obj}, {obj}, {obj}, {obj}],
-    //   white: [{obj}, {obj}],
-    //   yellow: [{obj}, {obj}],
-    //   orange: [{obj}],
-    //   red: [{obj}]
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((arr, star) => {
+      !arr[star.color] && (arr[star.color] = []);
+      arr[star.color].push(star);
+      return arr
+    }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   constellationsStarsExistIn() {
-    // Return an array of the names of the constellations that the brightest stars are part of e.g.
-
-    //  [ "Canis Major",
-    //    "Carina",
-    //    "Boötes",
-    //    "Auriga",
-    //    "Orion",
-    //    "Lyra",
-    //    "Canis Minor",
-    //    "The Plow",
-    //    "Orion",
-    //    "The Little Dipper" ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.sort((a, b) => a.visualMagnitude - b.visualMagnitude).map(star => star.constellation);
+    result.splice(result.indexOf(''), 1);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: charaters, weapons from ./datasets/ultima
 const ultimaPrompts = {
   totalDamage() {
-    // Return the sum of the amount of damage for all the weapons that our characters can use
-    // Answer => 113
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const weaponsArr = Object.entries(weapons);
+    const result = characters.reduce((sum, character) => {
+      character.weapons.forEach(weapon => {
+        weaponsArr.forEach(item => {
+          (item[0] === weapon) && (sum += item[1].damage);
+        });
+      });
+      return sum;
+    }, 0);
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   charactersByTotal() {
-    // Return the sum damage and total range for each character as an object.
-    // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const weaponsArr = Object.entries(weapons);
+    const result = characters.reduce((arr, character) => {
+      let totalDamage = 0;
+      let totalRange = 0;
+      weaponsArr.forEach(weapon => {
+        if (character.weapons.includes(weapon[0])) {
+          totalDamage += weapon[1].damage;
+          totalRange += weapon[1].range;
+        }
+      });
+      const obj = {
+        [character.name]: {
+          damage: totalDamage,
+          range: totalRange
+        }
+      };
+      arr.push(obj)
+      return arr;
+    }, []);
+    console.log(result)
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
   countAwesomeDinosaurs() {
-    // Return an object where each key is a movie title and each value is the
-    // number of awesome dinosaurs in that movie. e.g.:
-    // {
-    //   'Jurassic Park': 5,
-    //   'The Lost World: Jurassic Park': 8,
-    //   'Jurassic Park III': 9,
-    //   'Jurassic World': 11,
-    //   'Jurassic World: Fallen Kingdom': 18
-    // }
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const dinos = Object.entries(dinosaurs);
+    const awesomeDinos = dinos.reduce((acc, dino) => {
+      dino[1].isAwesome && acc.push(dino[0])
+      return acc;
+    }, []);
+    const result = movies.reduce((acc, movie) => {
+      acc[movie.title] = 0;
+      movie.dinos.forEach(dino => awesomeDinos.includes(dino) && acc[movie.title]++)
+      return acc;
+    }, {});
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   averageAgePerMovie() {
@@ -564,9 +532,6 @@ const dinosaurPrompts = {
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   uncastActors() {
@@ -597,9 +562,6 @@ const dinosaurPrompts = {
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   actorsAgesInMovies() {
@@ -620,9 +582,6 @@ const dinosaurPrompts = {
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 

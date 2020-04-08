@@ -510,7 +510,7 @@ describe("PROTOTYPES", () => {
             cohort1801: 9
           });
         }),
-        it.only("modulesPerTeacher", () => {
+        it("modulesPerTeacher", () => {
           const e = turingPrompts.modulesPerTeacher();
           expect(e).to.deep.equal({
             Pam: [2, 4],
@@ -714,7 +714,7 @@ describe("PROTOTYPES", () => {
         });
     }),
     describe("Dinosaur Prompts", () => {
-      it("countAwesomeDinosaurs", () => {
+      it.only("countAwesomeDinosaurs", () => {
           const e = dinosaurPrompts.countAwesomeDinosaurs();
           expect(e).to.deep.equal({
             "Jurassic Park": 5,
