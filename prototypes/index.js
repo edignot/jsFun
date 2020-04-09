@@ -483,7 +483,6 @@ const ultimaPrompts = {
       arr.push(obj)
       return arr;
     }, []);
-    console.log(result)
     return result;
   }
 };
@@ -505,62 +504,42 @@ const dinosaurPrompts = {
   },
 
   averageAgePerMovie() {
-    /* Return an object where each key is a movie director's name and each value is
-        an object whose key is a movie's title and whose value is the average age
-        of the cast on the release year of that movie.
-      e.g.:
-      {
-        'Steven Spielberg':
-          {
-            'Jurassic Park': 34,
-            'The Lost World: Jurassic Park': 37
-          },
-        'Joe Johnston':
-          {
-            'Jurassic Park III': 44
-          },
-        'Colin Trevorrow':
-          {
-            'Jurassic World': 56
-           },
-        'J. A. Bayona':
-          {
-            'Jurassic World: Fallen Kingdom': 59
-          }
-      }
-    */
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let people = Object.entries(humans);
+    const result = movies.reduce((acc, movie) => {
+      let totalAge = 0;
+      movie.cast.forEach(actor => {
+        people.forEach(person => {
+          (person[0] === actor) && (totalAge += (movie.yearReleased - person[1].yearBorn));
+        });
+      });
+      let avgAge = Math.floor(totalAge / movie.cast.length);
+      !acc[movie.director] ? (acc[movie.director] = {
+        [movie.title]: avgAge
+      }) : acc[movie.director][movie.title] = avgAge;
+      return acc
+    }, {});
     return result;
   },
 
   uncastActors() {
-    /*
-    Return an array of objects that contain the names of humans who have not been cast in a Jurassic Park movie (yet), their nationality, and their imdbStarMeterRating. The object in the array should be sorted alphabetically by nationality.
+    let actors = Object.entries(humans);
 
-    e.g.
-      [{
-        name: 'Justin Duncan',
-        nationality: 'Alien',
-        imdbStarMeterRating: 0
-      },
-      {
-        name: 'Karin Ohman',
-        nationality: 'Chinese',
-        imdbStarMeterRating: 0
-      },
-      {
-        name: 'Tom Wilhoit',
-        nationality: 'Kiwi',
-        imdbStarMeterRating: 1
-      }, {
-        name: 'Jeo D',
-        nationality: 'Martian',
-        imdbStarMeterRating: 0
-      }]
-    */
+    let castActors = movies.reduce((actorsArr, movie) => {
+      movie.cast.forEach(person => !actorsArr.includes(person) && actorsArr.push(person))
+      return actorsArr;
+    }, []);
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const people = actors.reduce((info, actor) => {
+      if (!castActors.includes(actor[0])) {
+        info.push({
+          'imdbStarMeterRating': actor[1].imdbStarMeterRating,
+          'name': actor[0],
+          'nationality': actor[1].nationality
+        });
+      }
+      return info;
+    }, []);
+    const result = people.sort((a, b) => (a.nationality > b.nationality) ? 1 : ((b.nationality > a.nationality) ? -1 : 0));
     return result;
   },
 
