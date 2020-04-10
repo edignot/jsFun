@@ -766,7 +766,7 @@ describe("PROTOTYPES", () => {
             }
           ]);
         }),
-        it("actorsAgesInMovies", () => {
+        it.only("actorsAgesInMovies", () => {
           const e = dinosaurPrompts.actorsAgesInMovies();
           expect(e).to.deep.equal([{
               name: "Sam Neill",
